@@ -1,0 +1,78 @@
+<div>
+  <span>
+    <span><a routerLink="../">Reservation</a></span> /
+    <span><a>Ajout</a></span>
+  </span>
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <!-- Add your error icon here -->
+        </div>
+        <span class="alert-text">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Success message -->
+  <div *ngIf="show" class="alert alert-success" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <!-- Add your success icon here -->
+        </div>
+        <span class="alert-text">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+    <form clrForm [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <clr-combobox-container>
+            <label>Randonne </label>
+            <clr-combobox formControlName="randonneeId" name="myState" (clrSelectionChange)=" openChangeRandonnee($event)">
+              <clr-options>
+                <clr-option *clrOptionItems="let randonnee of randonneeList; field: 'titre'" [clrValue]="randonnee">
+                  {{ randonnee.titre }}
+                </clr-option>
+              </clr-options>
+            </clr-combobox>
+            <clr-control-helper>Helper text</clr-control-helper>
+            <clr-control-error>There was an error</clr-control-error>
+          </clr-combobox-container>
+          <clr-combobox-container>
+            <label>Client </label>
+            <clr-combobox formControlName="randonneeId" name="myState" (clrSelectionChange)="openChange($event)">
+              <clr-options>
+                <clr-option *clrOptionItems="let randonnee of userList; field: 'username'" [clrValue]="randonnee">
+                  {{ randonnee.username }}
+                </clr-option>
+              </clr-options>
+            </clr-combobox>
+            <clr-control-helper>Helper text</clr-control-helper>
+            <clr-control-error>There was an error</clr-control-error>
+          </clr-combobox-container>
+       
+          <clr-combobox-container>
+            <label>nombre de Participation</label>
+            <clr-combobox formControlName="nombreParticipation" name="myState" (clrSelectionChange)="openChangePersonne($event)">
+              <clr-options>
+                <clr-option *clrOptionItems="let state of states; field: 'value'" [clrValue]="state">
+                    <cds-icon shape="employee"></cds-icon>
+                  {{ state.value }}
+             
+                </clr-option>
+              </clr-options>
+            </clr-combobox>
+            <clr-control-helper>Helper text</clr-control-helper>
+            <clr-control-error>There was an error</clr-control-error>
+          </clr-combobox-container>
+          <clr-input-container>
+            <label>Prix total </label>
+            <input clrInput placeholder=" prix total" name="name" formControlName="prix"/>
+          </clr-input-container>
+          <div class="clr-form-control">
+            <button type="submit" class="btn">Enregister</button>
+            <button type="button" class="btn" (click)="formGroup.reset()">Réinitialiser</button>
+          </div>
+</form>
+   
+</div>

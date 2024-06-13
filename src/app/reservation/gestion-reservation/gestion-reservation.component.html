@@ -1,0 +1,76 @@
+<h1>Gestion des Réservations</h1>
+<button class="btn" routerLink="./reservations-add">Ajouter Réservation</button>
+<clr-datagrid>
+  <clr-dg-column>
+    <ng-container>ID</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Date de Réservation</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Prix</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Nombre de Participations</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Randonnee ID</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Client ID</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Valide</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Annuler</ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>Action</ng-container>
+  </clr-dg-column>
+
+  <clr-dg-placeholder>Aucune réservation trouvée !</clr-dg-placeholder>
+  <clr-dg-row *clrDgItems="let reservation of reservations" [clrDgItem]="reservation">
+    <clr-dg-cell>{{ reservation.id }}</clr-dg-cell>
+    <clr-dg-cell>{{ reservation.dateReservation | date }}</clr-dg-cell>
+    <clr-dg-cell>{{ reservation.prix }}</clr-dg-cell>
+    <clr-dg-cell>
+      <span class="badge badge-info">
+        <span class="badge badge-purple">{{ reservation.nombreParticipation }}</span>
+        <span class="h2">Place totale: <span class="badge badge-danger">{{reservation.randonneeId?.nomber_de_participant}}</span></span>
+      </span>
+    </clr-dg-cell>
+    <clr-dg-cell><span class="badge badge-purple">{{ reservation.randonneeId?.titre }}</span></clr-dg-cell>
+    <clr-dg-cell><span class="badge badge-light-blue">{{ reservation.clientId?.username }} :{{ reservation.clientId?.email }}</span></clr-dg-cell>
+    <clr-dg-cell>
+      <span *ngIf="reservation.isValid; else notValid" class="badge badge-success">Oui</span>
+      <ng-template #notValid > <span class="badge badge-danger"> Non</span></ng-template>
+    </clr-dg-cell>
+    <clr-dg-cell>
+      <span *ngIf="reservation.cancel; else notcancel" class="badge badge-success">Oui</span>
+      <ng-template #notcancel > <span class="badge badge-danger"> Non</span></ng-template>
+    </clr-dg-cell>
+    <clr-dg-cell class="cursor-pointer">
+      <div class="btn-group btn-primary">
+        <button class="btn btn-success" [disabled]="reservation.isValid==true || reservation.cancel==true" (click)="updateIsValid(reservation.id)"><cds-icon shape="check"></cds-icon>
+
+        </button>
+        <button class="btn btn-danger"[disabled]="reservation.cancel==true || reservation.isValid==true" (click)="cancelReservation(reservation.id)"><cds-icon shape="ban"></cds-icon></button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-detail *clrIfDetail="let reservationDetail">
+    <clr-dg-detail-header></clr-dg-detail-header>
+    <clr-dg-detail-body>
+      <ul class="list-group">
+        <li><b>Date de Réservation:</b> {{ reservationDetail?.dateReservation | date }}</li>
+        <li><b>Prix:</b> {{ reservationDetail?.prix }}</li>
+        <li><b>Nombre de Participations:</b> {{ reservationDetail?.nombreParticipation }}</li>
+        <li><b>User ID:</b> {{ reservationDetail?.userId }}</li>
+        <li><b>Randonnee ID:</b> {{ reservationDetail?.randonneeId }}</li>
+        <li><b>Client ID:</b> {{ reservationDetail?.clientId }}</li>
+        <li><b>ID:</b> {{ reservationDetail?.id }}</li>
+      </ul>
+    </clr-dg-detail-body>
+  </clr-dg-detail>
+</clr-datagrid>

@@ -1,0 +1,70 @@
+<h1> Gestion de circuit</h1>
+<button class="btn" routerLink="./circuits/add">Ajoute un circuit</button>
+<clr-datagrid>
+    <clr-dg-column>
+        <ng-container>
+          ID
+        </ng-container>
+      </clr-dg-column>
+      
+    <clr-dg-column>
+      <ng-container>
+        Ville
+      </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+      <ng-container>
+        Départ
+      </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+      <ng-container>
+       Présentation
+      </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+      <ng-container>
+        Durée
+      </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+        <ng-container>
+          Action
+        </ng-container>
+      </clr-dg-column>
+    
+  
+    
+    <clr-dg-placeholder>Nous n'avons trouvé aucun circuit !</clr-dg-placeholder>
+    <clr-dg-row *clrDgItems="let circuit of circuits" [clrDgItem]="circuit">
+
+      <clr-dg-cell>{{ circuit.id }}</clr-dg-cell>
+      <clr-dg-cell>{{ circuit.ville }}</clr-dg-cell>
+      <clr-dg-cell>{{ circuit.depart }}</clr-dg-cell>
+      <clr-dg-cell>{{ circuit.arrival }}</clr-dg-cell>
+      <clr-dg-cell>{{ circuit.duree }}</clr-dg-cell>
+      <clr-dg-cell>
+        <div class="btn-group btn-primary">
+            <button class="btn btn-success" routerLink="circuit-update/{{ circuit.id }}"><cds-icon shape="pencil"></cds-icon></button>
+            <button class="btn btn-danger" (click)="deleteAction(circuit.id)"><cds-icon shape="trash"></cds-icon></button>
+          </div>
+      </clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-detail *clrIfDetail="let circuit">
+      <clr-dg-detail-header></clr-dg-detail-header>
+      <clr-dg-detail-body>
+        <ul class="list-group">
+          <li><b> Id:</b> {{ circuit.id }}</li>
+          <li><b>Ville:</b> {{ circuit.ville}}</li>
+          <li><b>point de part :</b> {{ circuit.depart }} </li>
+          <li><b>Présentation: </b>{{ circuit.arrival }}</li>
+          <li><b>Durée:</b> {{ circuit.duree}} Heures</li>
+  
+        </ul>
+      </clr-dg-detail-body>
+    </clr-dg-detail>
+  </clr-datagrid>
+  <app-detele-cricuit *ngIf="show" [circuitId]="idcircuit " (closed)="closeAction()"  (saved)="saved()"></app-detele-cricuit>

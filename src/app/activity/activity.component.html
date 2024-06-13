@@ -1,0 +1,80 @@
+<section>
+    <h3> Gestion d'Activities </h3>
+    <br>
+    <clr-datagrid >
+      <clr-dg-action-bar>
+          <div class="btn-group large-screen">
+          
+                  <button class="btn" routerLink="./add">Ajouter une activitée </button>
+                 
+                </div>
+        
+      </clr-dg-action-bar>
+  <clr-dg-column>
+    <ng-container>
+      Id
+    </ng-container>
+  </clr-dg-column>
+
+  <clr-dg-column>
+    <ng-container>
+      Nom de activitée
+    </ng-container>
+  </clr-dg-column>
+
+  <clr-dg-column>
+    <ng-container>
+     description
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>
+    Adresse
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>
+   Action
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-placeholder>Nous n'avons trouvé aucun activity !</clr-dg-placeholder>
+  <clr-dg-row *clrDgItems="let activity of  activities" [clrDgItem]="activity">
+    <clr-dg-cell>{{ activity.id }}</clr-dg-cell>
+    <clr-dg-cell>{{activity.title}}</clr-dg-cell>
+    <clr-dg-cell>{{activity.description}}</clr-dg-cell>
+    <clr-dg-cell>{{activity.location
+      }}</clr-dg-cell>
+    <clr-dg-cell>  
+      <div class="btn-group btn-primary">
+        <!-- <button class="btn"  routerLink="detail/{{activity.id}}"><cds-icon shape="eye"></cds-icon></button> -->
+        <button class="btn btn-success"routerLink="update/{{activity.id}}"><cds-icon shape="pencil"></cds-icon></button>
+        <button class="btn btn-danger"(click)="deleteAction(activity.id)"><cds-icon shape="trash"></cds-icon></button>
+      </div>
+    
+    </clr-dg-cell>
+
+  
+    </clr-dg-row>
+    <clr-dg-detail *clrIfDetail="let data">
+      <clr-dg-detail-header></clr-dg-detail-header>
+      <clr-dg-detail-body>
+        <ul class="list-group">
+          <li><b> Titre:</b> {{data.title}}</li>
+          <li><b>Description:</b> {{data.description}}</li>
+          <!-- <li><b>Durée:</b> {{data.duration}}</li> -->
+          <li> <b> Period:</b>   <b> de Juin à Décembre </b></li>
+          <li><b>Date: </b>{{data.date}}</li>
+          <li><b>Difficulté:</b> {{data.difficult}}</li>
+          <li><b>Retourne au point de départ:</b>
+            <span *ngIf="data.Return_departure_point==true " class="badge badge-success"> oui </span>
+            <span *ngIf="data.Return_departure_point==false " class="badge badge-danger"> non </span>
+          </li>
+          <li><b>Location:</b> {{data.location}}</li>
+        </ul>
+      </clr-dg-detail-body>
+    </clr-dg-detail>
+</clr-datagrid>
+
+
+</section>
+<app-delet-activity *ngIf="show" [activityId]="activityId" (closed)="closeAction()" (saved)="saved()"></app-delet-activity>  

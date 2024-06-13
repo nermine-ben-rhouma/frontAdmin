@@ -1,0 +1,129 @@
+<section>
+
+  <span>
+    <span><a routerLink="../">Agence</a></span> /
+    <span><a>Ajout</a></span>
+  </span>
+  
+  <!-- Error message -->
+  <div *ngIf="showError" class="alert alert-danger" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <!-- Add your error icon here -->
+        </div>
+        <span class="alert-text">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Success message -->
+  <div *ngIf="show" class="alert alert-success" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <!-- Add your success icon here -->
+        </div>
+        <span class="alert-text">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Client form -->
+  <form clrForm [formGroup]="form" (ngSubmit)="onSubmit()">
+    <clr-input-container>
+      <label>Nom </label>
+      <input clrInput type="text" formControlName="name" />
+      <clr-control-error *clrIfError="'required'">Le nom est obligatoire</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Activitie*</label>
+      <input clrInput type="text" formControlName="activity" />
+      <clr-control-error *clrIfError="'required'">Le prénom est obligatoire</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+      <label>Description</label>
+      <input clrInput type="text" formControlName="description" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>address</label>
+      <input clrInput type="text" formControlName="adresse" />
+    </clr-input-container>
+    <clr-input-container>
+      <label> postalCode</label>
+      <input clrInput type="text" formControlName="codePostal" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>Ville</label>
+      <input clrInput type="text" formControlName="city" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>coordonnées</label>
+      <input clrInput type="text" formControlName="coordonness" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>Telephone</label>
+      <input clrInput type="text" formControlName="telephone" />
+    </clr-input-container>
+    <clr-input-container>
+      <label>Email:</label>
+      <input clrInput type="text" formControlName="email" />
+    </clr-input-container>
+    <clr-password-container>
+      <label>Password</label>
+      <input
+        clrPassword
+        autocomplete="current-password"
+        placeholder="Password please!"
+        name="password"
+        formControlName="password"
+   
+      />
+    </clr-password-container>
+  
+    <clr-input-container>
+      <label for="picture">Image:</label>
+      <!-- <input type="file"(change)="picked($event)" placeholder="Upload file"formControlName="picture" accept="*" /> -->
+      <input type="file"
+           (change)="picked($event)"
+           placeholder="Upload file"
+           accept="*">
+      <clr-control-error *clrIfError="'required'">Image est obligatoire</clr-control-error>
+    </clr-input-container>
+    <label class="btn btn-link">
+      <input type="file"
+             (change)="picked($event)"
+             placeholder="Upload file"
+             accept="*">
+      Attach Files
+  </label>
+  <div *ngFor="let item of pictureArray ;let i=index" class="clr-col-12 clr-col-sm-3	clr-col-md-4	clr-col-lg-4	clr-col-xl-2   img">
+    <div class="card clickable" >
+      <div class="card-img container">
+        <div class="clr-row clr-justify-content-between">
+          <div class="clr-col-4">
+            <span class="label label-success" *ngIf="item.defaults == true">Principale</span>
+          </div>
+          <div class="clr-justify-content-end">
+            <span>
+              <button type="button" class="btn btn-icon btn-warning btn-sm delete-icon" aria-label="warning"
+                (click)="deletePicAction(item)">
+                <clr-icon shape="times"></clr-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+        <img [src]="item.url">
+      </div>
+    </div>
+  </div>
+
+    <br>
+    <!-- <button class="btn btn-outline" [disabled]="form.invalid">Enregistrer</button> -->
+    <div class="btn-group btn-primary">
+      <button class="btn" (click)="form.reset()"> reset</button>
+    
+      <button  class="btn" type="submit" [disabled]="form.invalid">Submit</button>
+    </div>
+  </form>
+</section>

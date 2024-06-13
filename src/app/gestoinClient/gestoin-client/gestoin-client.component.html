@@ -1,0 +1,95 @@
+
+        <h1>Clients</h1>
+
+          <clr-datagrid >
+            <clr-dg-action-bar>
+              <div class="btn-group large-screen">
+                  <button type="button" class="btn btn-sm btn-secondary" routerLink="add-client">
+                      <clr-icon shape="plus"></clr-icon> Ajouter Client
+                  </button>
+              </div>
+          </clr-dg-action-bar>
+            <clr-dg-column >
+              <ng-container >
+                Id
+              </ng-container>
+            </clr-dg-column>
+            <clr-dg-column >
+              <ng-container >
+              Prenom
+              </ng-container>
+            </clr-dg-column>
+          
+        
+            <clr-dg-column [clrDgField]="'dueDate'">
+              <ng-container >
+            Nom de utilisateur
+            </ng-container>
+              <clr-dg-filter>
+              
+              </clr-dg-filter>
+            </clr-dg-column>
+            <clr-dg-column >
+              <ng-container >
+  Role          </ng-container>
+              <clr-dg-filter >
+  
+              </clr-dg-filter>
+            </clr-dg-column>
+            <clr-dg-column >
+            <ng-container >
+              Action      
+            </ng-container>
+            <clr-dg-filter >
+             </clr-dg-filter>
+            </clr-dg-column>
+             <clr-dg-placeholder>Nous n'avons trouvé aucun Utilisateur !</clr-dg-placeholder> 
+          <clr-dg-row *ngFor="let user of clients" [clrDgItem]="user">
+              
+        
+              <clr-dg-cell  class="cursor-pointer" >{{user.id}}</clr-dg-cell>
+              <clr-dg-cell  class="cursor-pointer"  >{{user.firstName}}</clr-dg-cell>
+              <clr-dg-cell  class="cursor-pointer"  > {{user.lastName}}</clr-dg-cell>
+              <clr-dg-cell  class="cursor-pointer"  > 
+             
+                <span class="badge badge-success" >Client</span>
+              </clr-dg-cell>
+              <clr-dg-cell  class="cursor-pointer"  > 
+                <div class="btn-group btn-primary">
+               
+                  <button class="btn btn-success" routerLink="update-client/{{user.id}}"><cds-icon shape="pencil"></cds-icon>
+  
+                  </button>
+                  <button class="btn btn-danger" (click)="deleteAction(user.id)" ><cds-icon shape="trash"></cds-icon></button>
+                </div>
+              </clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-detail *clrIfDetail="let user">
+              <clr-dg-detail-header></clr-dg-detail-header>
+              <clr-dg-detail-body>
+                <ul class="list-group">
+                  <li><b>Username:</b> {{ user.username }}</li>
+                  <li><b>Email:</b> {{ user.email }}</li>
+                  <li><b>First Name:</b> {{ user.firstName }}</li>
+                  <li><b>Last Name:</b> {{ user.lastName }}</li>
+                  <li><b>Role:</b> {{ user.role }}</li>
+                  <li><b>Created At:</b> {{ user.createdAt }}</li>
+                  <li><b>Updated At:</b> {{ user.updatedAt }}</li>
+                  <li><b>Is Active:</b> {{ user.isActive ? 'Yes' : 'No' }}</li>
+                </ul>
+              </clr-dg-detail-body>
+            </clr-dg-detail>
+            <clr-dg-footer>
+           
+              <clr-dg-pagination  >
+                <clr-dg-page-size ></clr-dg-page-size>
+            
+              </clr-dg-pagination>
+            </clr-dg-footer>
+       </clr-datagrid>
+       <app-delete-client *ngIf="showAlert"  [clientId]="ClientId" (delete)="closeAction()"(saved)="saveAction()"></app-delete-client>
+
+    
+    
+    
+  

@@ -1,0 +1,62 @@
+<span>
+  <span><a routerLink="../../">Activitie</a></span> /
+  <span><a>Modifier</a></span>
+</span>
+<h1> Modifier Activitie</h1>
+<clr-alert *ngIf="show" [clrAlertType]="'success'" [clrAlertClosable]="true" >
+  <clr-alert-item>
+    <span class="alert-text">
+      {{message}}
+      </span>
+  </clr-alert-item>
+</clr-alert>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <clr-input-container>
+    <label for="title">Titre:</label>
+    <input clrInput type="text" id="title" formControlName="title">
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="description">Description:</label>
+    <textarea clrInput id="description" formControlName="description"></textarea>
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="duration">Duration:</label>
+    <input clrInput type="text" id="duration" formControlName="duration">
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="location">Location:</label>
+    <input clrInput type="text" id="location" formControlName="location">
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="difficult">Difficult:</label>
+    <input clrInput type="text" id="difficult" formControlName="difficult">
+    <clr-control-error *clrIfError="'required'">
+      Difficult is required
+    </clr-control-error>
+  </clr-input-container>
+  
+  <clr-toggle-container>
+    <clr-toggle-wrapper>
+      <!-- <label> retourne au point de départ</label> -->
+      <input type="checkbox"  formControlName='Return_departure_point'    clrToggle value="true" name="options" />
+      <label>retourne au point de départ</label>
+    </clr-toggle-wrapper>
+    </clr-toggle-container>
+  
+
+  <clr-input-container>
+    <label for="date">Date:</label>
+    <input clrInput type="date" id="date" formControlName="date">
+    <clr-control-error *clrIfError="'required'">
+      Date is required
+    </clr-control-error>
+  </clr-input-container>
+  
+
+  
+  <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+</form>

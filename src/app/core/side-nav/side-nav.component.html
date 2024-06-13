@@ -1,0 +1,42 @@
+
+        <a clrVerticalNavLink  *ngIf="role=='admin'"   routerLink="./client" routerLinkActive="active">
+          <cds-icon shape="assign-user"></cds-icon>
+     Client
+        </a>
+        <a clrVerticalNavLink   *ngIf="role=='admin'" routerLink="./agency" routerLinkActive="active">
+          <cds-icon shape="home"></cds-icon>
+          Agence
+         </a>
+        <a clrVerticalNavLink  routerLink="./randonnee" routerLinkActive="active">
+          <cds-icon shape="compass"></cds-icon>
+          Randonnee
+        </a>
+        <a clrVerticalNavLink  routerLink="./reservation" routerLinkActive="active">
+          <cds-icon shape="compass"></cds-icon>
+          reservation
+        </a>
+        <a clrVerticalNavLink  routerLink="./circuit"  routerLinkActive="active">
+          <cds-icon shape="caravan"></cds-icon>          Circuit
+        </a>
+        <a clrVerticalNavLink  routerLink="./activity" routerLinkActive="active">
+          <cds-icon shape="bicycle"></cds-icon>
+         Activities
+        </a>
+   
+        <a clrVerticalNavLink  routerLink="./blog" routerLinkActive="active">
+          <cds-icon shape="hotel"></cds-icon>
+      Blog
+        </a>
+        <a clrVerticalNavLink  routerLink="./materiel" routerLinkActive="active">
+          <cds-icon shape="tent"></cds-icon>
+ Materiel
+        </a>
+        <a clrVerticalNavLink routerLink="./user" *ngIf="role=='admin'"routerLinkActive="active">
+          <cds-icon shape="users"></cds-icon>
+          User
+        </a>
+        <a clrVerticalNavLink  (click)="logout()" routerLinkActive="active">
+          <cds-icon shape="logout"></cds-icon>
+          Deconnexion
+        </a>
+     

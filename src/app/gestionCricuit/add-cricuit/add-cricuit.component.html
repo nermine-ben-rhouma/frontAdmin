@@ -1,0 +1,66 @@
+
+<!-- Error message -->
+<span>
+  <span><a routerLink="../../">Circuit</a></span> /
+  <span><a>Ajout</a></span>
+</span>
+<div *ngIf="showError" class="alert alert-danger" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <!-- Add your error icon here -->
+        </div>
+        <span class="alert-text">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Success message -->
+  <div *ngIf="show" class="alert alert-success" role="alert">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <!-- Add your success icon here -->
+        </div>
+        <span class="alert-text">{{ message }}</span>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  
+      <clr-input-container>
+        <label for="depart">Ville:</label>
+        <input clrInput type="text" id="ville"   formControlName="ville">
+        <clr-control-error >
+          Départ is required
+        </clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label for="depart">Départ:</label>
+        <input clrInput type="text" id="depart" formControlName="depart">
+        <clr-control-error >
+          Départ is required
+        </clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label for="arrival">Presentation:</label>
+        <input clrInput type="text" id="arrival" formControlName="arrival">
+        <clr-control-error >
+          Arrival is required
+        </clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label for="duree">Durée:</label>
+        <input clrInput type="text" id="duree" formControlName="duree">
+        <clr-control-error >
+          <div>Durée is required</div>
+      
+        </clr-control-error>
+      </clr-input-container>
+      <br/>
+      <div class="btn-group btn-primary">
+        <button class="btn" (click)="form.reset()"> reset</button>
+      
+        <button  class="btn" type="submit" [disabled]="form.invalid">Submit</button>
+      </div>
+    </form>

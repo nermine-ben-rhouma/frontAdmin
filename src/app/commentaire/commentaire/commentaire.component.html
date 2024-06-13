@@ -1,0 +1,33 @@
+<h1>Gestion des Commentaires</h1>
+
+<clr-datagrid>
+    <clr-dg-column>ID</clr-dg-column>
+    <clr-dg-column>Client</clr-dg-column>
+    <clr-dg-column>Randonnee</clr-dg-column>
+    <clr-dg-column>Commentaire</clr-dg-column>
+    <clr-dg-column>Action</clr-dg-column>
+
+    <clr-dg-placeholder>Nous n'avons trouvé aucun commentaire !</clr-dg-placeholder>
+    <clr-dg-row *clrDgItems="let commentaire of commentaires" [clrDgItem]="commentaire">
+        <clr-dg-cell>{{ commentaire.id }}</clr-dg-cell>
+        <clr-dg-cell>{{ commentaire.clientId.name }}</clr-dg-cell>
+        <clr-dg-cell>{{ commentaire.randonneeId.title }}</clr-dg-cell>
+        <clr-dg-cell>{{ commentaire.content }}</clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-primary">
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-detail *clrIfDetail="let commentaire">
+        <clr-dg-detail-header></clr-dg-detail-header>
+        <clr-dg-detail-body>
+            <ul class="list-group">
+                <li><b>Id:</b> {{ commentaire.id }}</li>
+                <li><b>Client:</b> {{ commentaire.client.name }}</li>
+                <li><b>Randonnee:</b> {{ commentaire.randonnee.title }}</li>
+                <li><b>Commentaire:</b> {{ commentaire.content }}</li>
+            </ul>
+        </clr-dg-detail-body>
+    </clr-dg-detail>
+</clr-datagrid>

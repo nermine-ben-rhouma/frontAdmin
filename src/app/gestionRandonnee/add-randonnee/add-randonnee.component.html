@@ -1,0 +1,181 @@
+
+<h3>Ajout Randonnée</h3>
+<span>
+  <span><a routerLink="../">Randonnée</a></span> /
+  <span><a>Ajout</a></span>
+</span>
+
+<div *ngIf="showError" class="alert alert-danger" role="alert">
+  <div class="alert-items">
+    <div class="alert-item static">
+      <div class="alert-icon-wrapper">
+        <!-- Add your error icon here -->
+      </div>
+      <span class="alert-text">{{ message }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Success message -->
+<div *ngIf="show" class="alert alert-success" role="alert">
+  <div class="alert-items">
+    <div class="alert-item static">
+      <div class="alert-icon-wrapper">
+        <!-- Add your success icon here -->
+      </div>
+      <span class="alert-text">{{ message }}</span>
+    </div>
+  </div>
+</div>
+<form   clrForm [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <clr-input-container>
+    <label for="titre">Titre:</label>
+    <input clrInput type="text" id="titre" formControlName="titre" />
+    <clr-control-error *clrIfError="'required'">Titre est obligatoire</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="description">Description:</label>
+    <textarea clrInput type="text" id="description" formControlName="description"></textarea>
+    <clr-control-error *clrIfError="'required'">Description est obligatoire</clr-control-error>
+  </clr-input-container>
+  
+
+  <clr-input-container>
+      <label for="date">Date:</label>
+      <input clrInput type="date" id="date" formControlName="date">
+      <clr-control-error *clrIfError="'required'">
+        Date is required
+      </clr-control-error>
+    </clr-input-container>
+
+  <clr-input-container>
+    <label for="duree">Durée:</label>
+    <input clrInput type="number" id="duree" formControlName="duree" />
+    <clr-control-error *clrIfError="'required'">Durée est obligatoire</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="denivele">Dénivelé:</label>
+    <input clrInput type="number" id="denivele" formControlName="denivele" />
+    <clr-control-error *clrIfError="'required'">Dénivelé est obligatoire</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="difficulte">Difficulté:</label>
+    <input clrInput type="text" id="difficulte" formControlName="difficulte" />
+    <clr-control-error *clrIfError="'required'">Difficulté est obligatoire</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label for="distance">Distance:</label>
+    <input clrInput type="number" id="distance" formControlName="distance" />
+    <clr-control-error *clrIfError="'required'">Distance est obligatoire</clr-control-error>
+  </clr-input-container>
+  <clr-input-container>
+    <label for="distance"> nomber de participant</label>
+    <input clrInput type="number" id="distance" formControlName="nomber_de_participant" />
+    <clr-control-error *clrIfError="'required'">Distance est obligatoire</clr-control-error>
+  </clr-input-container>
+    <clr-input-container>
+    <label for="distance">Prix:</label>
+    <input clrInput type="number" id="distance" formControlName="prix" />
+    <clr-control-error *clrIfError="'required'">Distance est obligatoire</clr-control-error>
+  </clr-input-container>
+<!-- 
+  <clr-combobox-container *ngIf="role!='agence'">
+    <label>Agence:</label>
+    <clr-combobox [(ngModel)]="activitie" name="multiSelect" clrMulti="true" (clrSelectionChange)="openChange($event)">
+      <ng-container *clrOptionSelected="let selected">
+        <cds-icon shape="home" role="img" aria-label="welcome home"></cds-icon>
+        {{ selected?.title }}
+      </ng-container>
+      <clr-options>
+        <clr-option *clrOptionItems="let state of activities; field: 'title'" [clrValue]="state">
+      
+          {{ state.title }}
+        </clr-option>
+      </clr-options>
+    </clr-combobox>
+    <clr-control-helper>Helper text</clr-control-helper>
+    <clr-control-error>There was an error</clr-control-error>
+  </clr-combobox-container> -->
+  <clr-combobox-container>
+  <label>Activites</label>
+  <clr-combobox [(ngModel)]="activitie" name="multiSelect" clrMulti="true" (clrSelectionChange)="openChange($event)">
+    <ng-container *clrOptionSelected="let selected">
+      <cds-icon shape="home" role="img" aria-label="welcome home"></cds-icon>
+      {{ selected?.title }}
+    </ng-container>
+    <clr-options>
+      <clr-option *clrOptionItems="let state of activities; field: 'title'" [clrValue]="state">
+    
+        {{ state.title }}
+      </clr-option>
+    </clr-options>
+  </clr-combobox>
+  <clr-control-helper>Helper text</clr-control-helper>
+  <clr-control-error>There was an error</clr-control-error>
+</clr-combobox-container>
+<clr-combobox-container>
+  <label>circuites:</label>
+<clr-combobox [(ngModel)]="circuites" name="multiSelect" clrMulti="true" (clrSelectionChange)="openChangeCircuit($event)">
+  <ng-container *clrOptionSelected="let selected1">
+    <cds-icon shape="home" role="img" aria-label="welcome home"></cds-icon>
+    {{ selected1?.ville }}
+  </ng-container>
+  <clr-options>
+    <clr-option *clrOptionItems="let state of circuits; field: 'ville'" [clrValue]="state">
+  
+      {{ state.ville }}
+    </clr-option>
+  </clr-options>
+</clr-combobox>
+<clr-control-helper>Helper text</clr-control-helper>
+<clr-control-error>There was an error</clr-control-error>
+</clr-combobox-container>
+
+
+  <clr-input-container>
+    <label for="picture">Image:</label>
+    <!-- <input type="file"(change)="picked($event)" placeholder="Upload file"formControlName="picture" accept="*" /> -->
+    <input type="file"
+         (change)="picked($event)"
+         placeholder="Upload file"
+         accept="*">
+    <clr-control-error *clrIfError="'required'">Image est obligatoire</clr-control-error>
+  </clr-input-container>
+  <label class="btn btn-link">
+      <input type="file"
+             (change)="picked($event)"
+             placeholder="Upload file"
+             accept="*">
+      Attach Files
+  </label>
+  <div *ngFor="let item of pictureArray ;let i=index" class="clr-col-12 clr-col-sm-3	clr-col-md-4	clr-col-lg-4	clr-col-xl-2   img">
+      <div class="card clickable" >
+        <div class="card-img container">
+          <div class="clr-row clr-justify-content-between">
+            <div class="clr-col-4">
+              <span class="label label-success" *ngIf="item.defaults == true">Principale</span>
+            </div>
+            <div class="clr-justify-content-end">
+              <span>
+                <button type="button" class="btn btn-icon btn-warning btn-sm delete-icon" aria-label="warning"
+                  (click)="deletePicAction(item)">
+                  <clr-icon shape="times"></clr-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+          <img [src]="item.url">
+        </div>
+      </div>
+    </div>
+
+  <div class="clr-form-control">
+    <button class="btn" (click)="form.reset()"> reset</button>
+  
+    <button  class="btn" type="submit" [disabled]="form.invalid">Submit</button>
+  </div>
+</form>

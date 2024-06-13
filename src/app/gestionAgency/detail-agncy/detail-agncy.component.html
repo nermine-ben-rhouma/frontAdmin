@@ -1,0 +1,29 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th class="left">ID</th>
+        <th>Name</th>
+        <th>Activity</th>
+        <th>Adresse</th>
+        <th>Ville</th>
+        <th>Description</th>
+        <th>Code postal</th>
+        <th>coordonnees</th>
+        <th>Telephone</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="left">{{ agency.id }}</td>
+        <td>{{ agency.name }}</td>
+        <td><span class="badge badge-light-blue">{{ agency.activity }}</span></td>
+        <td>{{ agency.adresse }}</td>
+        <td>{{ agency.city}}</td>
+        <td>{{ agency.description}}</td>
+        <td>{{ agency.codePostal}}</td>
+        <td>{{ agency.coordonnees }}</td>
+        <td>{{ agency.telephone}}</td>
+      </tr>
+    </tbody>
+  </table>

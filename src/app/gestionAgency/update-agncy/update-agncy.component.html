@@ -1,0 +1,76 @@
+<section>
+
+    <span>
+      <span><a routerLink="../../">Agence</a></span> /
+      <span><a>Modifer</a></span>
+    </span>
+    <!-- Error message -->
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <!-- Add your error icon here -->
+          </div>
+          <span class="alert-text">{{ message }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Success message -->
+    <div *ngIf="show" class="alert alert-success" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <!-- Add your success icon here -->
+          </div>
+          <span class="alert-text">{{ message }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Client form -->
+    <form clrForm [formGroup]="form" (ngSubmit)="onSubmit()">
+      <clr-input-container>
+        <label>Nom </label>
+        <input clrInput type="text" formControlName="name" />
+        <clr-control-error *clrIfError="'required'">Le nom est obligatoire</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Activitie*</label>
+        <input clrInput type="text" formControlName="activity" />
+        <clr-control-error *clrIfError="'required'">Le prénom est obligatoire</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Description</label>
+        <input clrInput type="text" formControlName="description" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>address</label>
+        <input clrInput type="text" formControlName="address" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Email:</label>
+        <input clrInput type="text" formControlName="email" />
+      </clr-input-container>
+      <clr-input-container>
+        <label> postalCode</label>
+        <input clrInput type="text" formControlName="postalCode" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Ville</label>
+        <input clrInput type="text" formControlName="city" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>coordonnées</label>
+        <input clrInput type="text" formControlName="coordinates" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Telephone</label>
+        <input clrInput type="text" formControlName="phoneNumber" />
+      </clr-input-container>
+    
+      <br>
+      <button class="btn btn-outline" [disabled]="form.invalid">Enregistrer</button>
+    </form>
+  </section>
+  

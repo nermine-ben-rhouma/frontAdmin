@@ -1,0 +1,28 @@
+<span>
+  <span><a routerLink="../../">Circuit</a></span> /
+  <span><a>Detail</a></span>
+</span>
+<h3> Detail Circuit </h3>
+<table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ville</th>
+        <th>depart</th>
+        <th>presentation</th>
+        <th>duree</th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ circuit.id }}</td>
+        <td>{{ circuit.ville}}</td>
+        <td>{{ circuit.depart }} </td>
+        <td>{{ circuit.arrival }} days</td>
+        <td>{{ circuit.duree}}</td>
+   
+     
+      </tr>
+    </tbody>
+  </table>

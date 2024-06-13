@@ -1,0 +1,40 @@
+<h1>Gestion de Blogs</h1>
+<button class="btn" routerLink="./blog-add">Ajouter Blog</button>
+
+<clr-datagrid>
+    <clr-dg-column>ID</clr-dg-column>
+    <clr-dg-column>Nom</clr-dg-column>
+    <clr-dg-column>Description</clr-dg-column>
+    <clr-dg-column>Image</clr-dg-column>
+    <clr-dg-column>Action</clr-dg-column>
+
+    <clr-dg-placeholder>Nous n'avons trouvé aucun blog !</clr-dg-placeholder>
+    <clr-dg-row *clrDgItems="let blog of blogs" [clrDgItem]="blog">
+        <clr-dg-cell>{{ blog.id }}</clr-dg-cell>
+        <clr-dg-cell>{{ blog.title }}</clr-dg-cell>
+        <clr-dg-cell>{{ blog.description }}</clr-dg-cell>
+        <clr-dg-cell><img [src]="blog.urlImage" width="70" alt="Blog Image"></clr-dg-cell>
+        <clr-dg-cell>
+            <div class="btn-group btn-primary">
+                <button class="btn btn-success" routerLink="blog-update/{{ blog.id }}"><cds-icon shape="pencil"></cds-icon></button>
+                <button class="btn btn-danger" (click)="deleteAction(blog.id)"><cds-icon shape="trash"></cds-icon></button>
+            </div>
+        </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-detail *clrIfDetail="let blog">
+        <clr-dg-detail-header></clr-dg-detail-header>
+        <clr-dg-detail-body>
+            <ul class="list-group">
+                <li><b>Id:</b> {{ blog.id }}</li>
+                <li><b>Nom:</b> {{ blog.title }}</li>
+                <li><b>Description:</b> {{ blog.description }}</li>
+                <li><b>Image:</b>
+                    <img [src]="blog.urlImage" alt="Blog Image" class="img-thumbnail">
+                </li>
+            </ul>
+        </clr-dg-detail-body>
+    </clr-dg-detail>
+</clr-datagrid>
+
+<app-bolg-detele *ngIf="show" [bolgId]="idBolg" (closed)="closeAction()" (saved)="saved()"></app-bolg-detele>

@@ -1,0 +1,79 @@
+
+
+
+<section>
+    <h3>Gestion d'agence</h3>
+    <br>
+    <clr-datagrid >
+      <clr-dg-action-bar>
+          <div class="btn-group large-screen">
+          
+                  <button class="btn" routerLink="./add-agency">Ajouter un agence </button>
+                 
+              
+          </div>
+      </clr-dg-action-bar>
+  <clr-dg-column>
+    <ng-container>
+      Id
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>
+ Nom de agency
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>
+      Logo agence 
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>
+    Adresse
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-column>
+    <ng-container>
+   Action
+    </ng-container>
+  </clr-dg-column>
+  <clr-dg-placeholder>Nous n'avons trouvé aucun agency !</clr-dg-placeholder>
+  <clr-dg-row *clrDgItems="let agency of agencies" [clrDgItem]="agency">
+    <clr-dg-cell>{{ agency.id }}</clr-dg-cell>
+    <clr-dg-cell>{{agency.name}}</clr-dg-cell>
+    <clr-dg-cell><img *ngIf="agency.pictures.length>0" [src]=agency.pictures[0].url width="70"/>
+
+    </clr-dg-cell>
+    <clr-dg-cell>{{agency.adresse}}</clr-dg-cell>
+    <clr-dg-cell>  
+      <div class="btn-group btn-primary">
+        <button class="btn btn-success"routerLink="update-agency/{{agency.id}}"><cds-icon shape="pencil"></cds-icon></button>
+        <button class="btn btn-danger"(click)="deleteAction(agency.id)"><cds-icon shape="trash"></cds-icon></button>
+      </div>
+    
+    </clr-dg-cell>
+  
+    </clr-dg-row>
+    <clr-dg-detail *clrIfDetail="let voyage">
+      <clr-dg-detail-header></clr-dg-detail-header>
+      <clr-dg-detail-body>
+        <ul class="list-group">
+          <li><b>Nom:</b> {{ voyage.name }}</li>
+          <li><b>Activité:</b><span class="badge badge-warning"> {{ voyage.activity }}</span></li>
+          <li><b>Adresse:</b> {{ voyage.adresse }}</li>
+          <li><b>Ville:</b><cds-icon shape="map-marker" badge="success"></cds-icon>  {{ voyage.city }}</li>
+          <li><b>Code Postal:</b> {{ voyage.codePostal }}</li>
+          <li><b>Téléphone:</b> {{ voyage.telephone }}</li>
+          <li><b>Description:</b> {{ voyage.description }}</li>
+          <li><b>ID:</b> {{ voyage.id }}</li>
+        </ul>
+      </clr-dg-detail-body>
+    </clr-dg-detail>
+    
+
+</clr-datagrid>
+
+
+</section>
+<app-delete-agncy *ngIf="show" [agencyId]="agencyId" (closed)="closeAction()" (saved)="saved()"></app-delete-agncy>  

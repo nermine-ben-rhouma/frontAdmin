@@ -1,0 +1,80 @@
+<h1> Gestion de randonnee</h1>
+<button class="btn" routerLink="./add-randonnee">Ajoute Randonnee</button>
+<clr-datagrid>
+    <clr-dg-column>
+        <ng-container>
+          ID
+        </ng-container>
+      </clr-dg-column>
+      
+    <clr-dg-column>
+      <ng-container>
+    Titre 
+      </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+      <ng-container>
+        Description
+      </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+      <ng-container>
+        Date
+      </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-column>
+        <ng-container>
+          Action
+        </ng-container>
+      </clr-dg-column>
+    
+  
+    
+    <clr-dg-placeholder>Nous n'avons trouvé aucun circuit !</clr-dg-placeholder>
+    <clr-dg-row *clrDgItems="let randonnee of randoms" [clrDgItem]="randonnee">
+      <clr-dg-cell>{{randonnee.id}}</clr-dg-cell>
+      <clr-dg-cell>{{randonnee.titre}}</clr-dg-cell>
+      <clr-dg-cell>{{randonnee.description}}</clr-dg-cell>
+      <clr-dg-cell>{{randonnee.date}}</clr-dg-cell>
+      <clr-dg-cell>
+        <div class="btn-group btn-primary">
+            <button class="btn btn-success" routerLink="update-randonnee/{{randonnee.id}}"><cds-icon shape="pencil"></cds-icon></button>
+            <button class="btn btn-danger" (click)="deleteAction(randonnee.id)"><cds-icon shape="trash"></cds-icon></button>
+          </div>
+      </clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-detail *clrIfDetail="let randonnee">
+      <clr-dg-detail-header></clr-dg-detail-header>
+      <clr-dg-detail-body>
+        <ul class="list-group">
+          <li><b>ID:</b> {{ randonnee.id }}</li>
+          <li><b>Titre:</b> {{ randonnee.titre }}</li>
+          <li><b>Description:</b> {{ randonnee.description }}</li>
+          <li><b>Date:</b> {{ randonnee.date | date: 'short' }}</li>
+          <li><b>Durée:</b> {{ randonnee.duree }} jours</li>
+          <li><b>Dénivelé:</b> {{ randonnee.denivele }} meters</li>
+          <li><b>Difficulté:</b> <span class="badge badge-warning"> {{ randonnee.difficulte }}</span></li>
+          <li><b>Distance:</b> {{ randonnee.distance }} km</li>
+          <li><b>Photo:</b> <img [src]="randonnee.picture" alt="Randonnee Picture" *ngIf="randonnee.picture"></li>
+          <li><b>User ID:</b> {{ randonnee.userId }}</li>
+          <li><b>Nombre de Participants:</b> {{ randonnee.nomber_de_participant }}</li>
+          <li><b>Prix:</b> {{ randonnee.prix }} €</li>
+          <li><b>Réservations:</b>
+            <ul *ngIf="randonnee.reservations">
+              <li *ngFor="let reservation of randonnee.reservations">{{ reservation.id }}</li>
+            </ul>
+          </li>
+          <li><b>Photos:</b>
+            <ul *ngIf="randonnee.pictures">
+              <li *ngFor="let picture of randonnee.pictures"><img [src]="picture.url" alt="Additional Picture"></li>
+            </ul>
+          </li>
+        </ul>
+        
+      </clr-dg-detail-body>
+    </clr-dg-detail>
+  </clr-datagrid>
+  <app-detelel-randonnee *ngIf="show" [randoneeId]="idrRandonnee"  (closed)="closeAction()"  (saved)="saved()"></app-detelel-randonnee>

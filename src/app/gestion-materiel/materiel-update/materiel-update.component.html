@@ -1,0 +1,91 @@
+
+
+<section>
+    <h3>Modifie Materiel</h3>
+    <span>
+      <span><a routerLink="../../">Materiel</a></span> /
+      <span><a>Modifie</a></span>
+    </span>
+    
+    <!-- Error message -->
+    <div *ngIf="showError" class="alert alert-danger" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <!-- Add your error icon here -->
+          </div>
+          <span class="alert-text">{{ message }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Success message -->
+    <div *ngIf="show" class="alert alert-success" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <!-- Add your success icon here -->
+          </div>
+          <span class="alert-text">{{ message }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Materiel form -->
+    <form clrForm [formGroup]="form" (ngSubmit)="onSubmit()">
+      <clr-input-container>
+        <label>Nom </label>
+        <input clrInput type="text" formControlName="title" />
+        <clr-control-error *clrIfError="'required'">Le nom est obligatoire</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Description</label>
+        <input clrInput type="text" formControlName="description" />
+      </clr-input-container>
+      <clr-input-container>
+        <label>Prix</label>
+        <input clrInput type="number" formControlName="price" />
+        <clr-control-error *clrIfError="'required'">Le prix est obligatoire</clr-control-error>
+      </clr-input-container>
+      <clr-input-container>
+        <label for="picture">Image:</label>
+        <!-- <input type="file"(change)="picked($event)" placeholder="Upload file"formControlName="picture" accept="*" /> -->
+        <input type="file"
+             (change)="picked($event)"
+             placeholder="Upload file"
+             accept="*">
+        <clr-control-error *clrIfError="'required'">Image est obligatoire</clr-control-error>
+      </clr-input-container>
+      <label class="btn btn-link">
+          <input type="file"
+                 (change)="picked($event)"
+                 placeholder="Upload file"
+                 accept="*">
+          Attach Files
+      </label>
+      <div *ngFor="let item of pictureArray ;let i=index" class="clr-col-12 clr-col-sm-3	clr-col-md-4	clr-col-lg-4	clr-col-xl-2   img">
+        <div class="card clickable" >
+          <div class="card-img container">
+            <div class="clr-row clr-justify-content-between">
+              <div class="clr-col-4">
+                <span class="label label-success" *ngIf="item.defaults == true">Principale</span>
+              </div>
+              <div class="clr-justify-content-end">
+                <span>
+                  <button type="button" class="btn btn-icon btn-warning btn-sm delete-icon" aria-label="warning"
+                    (click)="deletePicAction(item)">
+                    <clr-icon shape="times"></clr-icon>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <img [src]="item.url">
+          </div>
+        </div>
+      </div>
+  
+      <br>
+      <button class="btn btn-outline" [disabled]="form.invalid">Enregistrer</button>
+    </form>
+  </section>
+  

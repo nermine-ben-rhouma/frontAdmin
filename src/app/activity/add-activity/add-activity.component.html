@@ -1,0 +1,66 @@
+
+<span>
+  <span><a routerLink="../">Activité</a></span> /
+  <span><a>Ajout</a></span>
+</span>
+<h1> Ajouter Activité</h1>
+<clr-alert *ngIf="show" [clrAlertType]="'success'" [clrAlertClosable]="true" >
+  <clr-alert-item>
+    <span class="alert-text">
+      {{message}}
+      </span>
+  </clr-alert-item>
+</clr-alert>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <clr-input-container>
+    <label for="title">Title:</label>
+    <input clrInput type="text" id="title" formControlName="title">
+    <clr-control-error *clrIfError="'required'">
+      Title is required
+    </clr-control-error>
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="description">Description:</label>
+    <textarea clrInput id="description" formControlName="description"></textarea>
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="duration">Duration:</label>
+    <input clrInput type="text "  id="duration" formControlName="duration"> heure
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="location">Location:</label>
+    <input clrInput type="text" id="location" formControlName="location">
+  </clr-input-container>
+  
+  <clr-input-container>
+    <label for="difficult">Difficulté:</label>
+    <input clrInput type="text" id="difficult" formControlName="difficult">
+    <clr-control-error *clrIfError="'required'">
+      Difficult is required
+    </clr-control-error>
+  </clr-input-container>
+  <clr-toggle-container>
+    <clr-toggle-wrapper>
+      <input type="checkbox" clrToggle value="true" formControlName='Return_departure_point' name="options" />
+      <label>Option 1</label>
+    </clr-toggle-wrapper>
+    </clr-toggle-container>
+  
+  <clr-input-container>
+    <label for="date">Date:</label>
+    <input clrInput type="date" id="date" formControlName="date"> 
+    <clr-control-error *clrIfError="'required'">
+      Date is required
+    </clr-control-error>
+  </clr-input-container>
+  
+
+  <div class="btn-group btn-primary">
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+    <button type="submit"  (click)="form.reset()" [disabled]="form.invalid" class="btn btn-primary">Reset</button>
+  </div>
+
+</form>

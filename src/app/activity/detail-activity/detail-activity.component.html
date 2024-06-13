@@ -1,0 +1,37 @@
+
+<span>
+    <span><a routerLink="../../">Activitie</a></span> /
+    <span><a>Detail</a></span>
+  </span>
+  <h1>  Detail Activitie</h1>
+<table class="table table-noborder">
+    <thead>
+      <tr>
+        <th class="left"> Titre</th>
+        <th> Description</th>
+        <th>duree</th>
+        <th class="left">Date</th>
+        <th class="left">Difficult</th>
+        <th class="left">Retourne au point de départ</th>
+        <th class="left">Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="left">{{data.title}}</td> 
+        <td>{{data.description}}</td>
+        <td>{{data.duration}}</td>
+        <td class="left">{{data.date}}</td>
+        <td class="left">{{data.difficult}}</td>
+        <td class="left">
+         
+          <span *ngIf="data.Return_departure_point==true "class="badge badge-success"> oui </span>
+          <span *ngIf="data.Return_departure_point==false "class="badge badge-danger"> non </span>
+        </td>
+
+        <td class="left">{{data.location}}</td>
+      </tr>
+   
+    
+    </tbody>
+  </table>

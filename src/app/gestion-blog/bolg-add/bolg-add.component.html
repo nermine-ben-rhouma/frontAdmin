@@ -1,0 +1,69 @@
+<span>
+    <span><a routerLink="../">Blog</a></span> /
+    <span><a>Ajout</a></span>
+  </span>
+  <h1> Ajouter Blog</h1>
+  <clr-alert *ngIf="show" [clrAlertType]="'success'" [clrAlertClosable]="true">
+    <clr-alert-item>
+      <span class="alert-text">
+        {{ message }}
+      </span>
+    </clr-alert-item>
+  </clr-alert>
+  
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <clr-input-container>
+      <label for="title">Title:</label>
+      <input clrInput type="text" id="title" formControlName="title">
+      <clr-control-error *clrIfError="'required'">
+        Title is required
+      </clr-control-error>
+    </clr-input-container>
+  
+    <clr-input-container>
+      <label for="description">Description:</label>
+      <textarea clrInput id="description" formControlName="description"></textarea>
+    </clr-input-container>
+    <clr-input-container>
+        <label for="picture">Image:</label>
+        <!-- <input type="file"(change)="picked($event)" placeholder="Upload file"formControlName="picture" accept="*" /> -->
+        <input type="file"
+             (change)="picked($event)"
+             placeholder="Upload file"
+             accept="*">
+        <clr-control-error *clrIfError="'required'">Image est obligatoire</clr-control-error>
+      </clr-input-container>
+      <label class="btn btn-link">
+          <input type="file"
+                 (change)="picked($event)"
+                 placeholder="Upload file"
+                 accept="*">
+          Attach Files
+      </label>
+      <div *ngFor="let item of pictureArray ;let i=index" class="clr-col-12 clr-col-sm-3	clr-col-md-4	clr-col-lg-4	clr-col-xl-2   img">
+        <div class="card clickable" >
+          <div class="card-img container">
+            <div class="clr-row clr-justify-content-between">
+              <div class="clr-col-4">
+                <span class="label label-success" *ngIf="item.defaults == true">Principale</span>
+              </div>
+              <div class="clr-justify-content-end">
+                <span>
+                  <button type="button" class="btn btn-icon btn-warning btn-sm delete-icon" aria-label="warning"
+                    (click)="deletePicAction(item)">
+                    <clr-icon shape="times"></clr-icon>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <img [src]="item.url">
+          </div>
+        </div>
+      </div>
+  
+    <div class="btn-group btn-primary">
+      <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+      <button type="button" (click)="form.reset(); showError = false;" class="btn btn-primary">Reset</button>
+    </div>
+  </form>
+  

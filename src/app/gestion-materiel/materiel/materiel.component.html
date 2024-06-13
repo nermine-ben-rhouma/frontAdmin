@@ -1,0 +1,78 @@
+<h1>Gestion de Materiel</h1>
+<button class="btn" routerLink="./materiel-add">Ajouter Materiel</button>
+<clr-datagrid>
+    <clr-dg-column>
+        <ng-container>
+          ID
+        </ng-container>
+    </clr-dg-column>
+      
+    <clr-dg-column>
+        <ng-container>
+          Nom
+        </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+        <ng-container>
+          Description
+        </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-column>
+        <ng-container>
+          Prix
+        </ng-container>
+    </clr-dg-column>
+    <clr-dg-column>
+      <ng-container>
+       Image 
+      </ng-container>
+  </clr-dg-column>
+
+    <clr-dg-column>
+        <ng-container>
+          Action
+        </ng-container>
+    </clr-dg-column>
+    
+    <clr-dg-placeholder>Nous n'avons trouvé aucun materiel !</clr-dg-placeholder>
+    <clr-dg-row *clrDgItems="let materiel of  materiels" [clrDgItem]="materiel">
+      <clr-dg-action-overflow>
+      </clr-dg-action-overflow>
+      <clr-dg-cell>{{materiel.id}}</clr-dg-cell>
+      <clr-dg-cell>{{materiel.title}}</clr-dg-cell>
+      <clr-dg-cell>{{materiel.description}}</clr-dg-cell>
+      <clr-dg-cell>{{materiel.price}}</clr-dg-cell>
+      <clr-dg-cell><img [src]=materiel.pictures[0].url width="70"/></clr-dg-cell>
+      <clr-dg-cell>
+        <div class="btn-group btn-primary">
+            <!-- <button class="btn" routerLink="materiel-detail//{{materiel.id}}">Détail</button> -->
+            <button class="btn btn-success" routerLink="materiel-update/{{materiel.id}}"><cds-icon shape="pencil"></cds-icon></button>
+            <button class="btn btn-danger" (click)=" deleteAction(materiel.id)"><cds-icon shape="trash"></cds-icon></button>
+        </div>
+      </clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-detail *clrIfDetail="let circuit">
+      <clr-dg-detail-header></clr-dg-detail-header>
+      <clr-dg-detail-body>
+        <ul class="list-group">
+          <li><b>Id:</b> {{ circuit.id }}</li>
+          <li><b>Nom:</b> {{ circuit.name }}</li>
+          <li><b>Description:</b> {{ circuit.description }}</li>
+          <li><b>Prix:</b> {{ circuit.price }} €</li>
+          <li><b>Photos:</b>
+            <ul *ngIf="circuit.pictures && circuit.pictures.length > 0">
+              <li *ngFor="let picture of circuit.pictures">
+                <img [src]="picture" alt="Circuit Picture" class="img-thumbnail">
+              </li>
+            </ul>
+            <span *ngIf="!circuit.pictures || circuit.pictures.length === 0">Aucune photo disponible</span>
+          </li>
+        </ul>
+      </clr-dg-detail-body>
+    </clr-dg-detail>
+    
+</clr-datagrid>
+<app-materiel-delete *ngIf="show" [materielId]="idMateriel" (closed)="closeAction()" (saved)="saved()"></app-materiel-delete>
+

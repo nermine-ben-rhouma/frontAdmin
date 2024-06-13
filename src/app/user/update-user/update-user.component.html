@@ -1,0 +1,77 @@
+<span>
+  <span><a routerLink="../">User</a></span> /
+  <span><a>Modification</a></span>
+</span>
+<section>
+  <h3>Modifier User</h3>
+  <clr-alert *ngIf="show" [clrAlertType]="'success'" [clrAlertClosable]="true" >
+    <clr-alert-item>
+      <span class="alert-text">
+        {{message}}
+        </span>
+    </clr-alert-item>
+  </clr-alert>
+  <br>
+  <form clrStepper [formGroup]="form" (ngSubmit)="submit()">
+      <clr-stepper-panel formGroupName="name">
+        <clr-step-title>information</clr-step-title>
+        <clr-step-content *clrIfExpanded>
+          <clr-input-container>
+            <label>Prenom </label>
+            <input clrInput formControlName="firstName" />
+            <clr-control-error *clrIfError="'required'"> nom Required</clr-control-error>
+          </clr-input-container>
+    
+          <clr-input-container>
+            <label>Nom</label>
+            <input clrInput formControlName="lastName" />
+            <clr-control-error *clrIfError="'required'">Nom Required</clr-control-error>
+          </clr-input-container>
+        
+          <clr-input-container>
+            <label>Email</label>
+            <input clrInput formControlName="email" />
+            <clr-control-error *clrIfError="'required'">email Required</clr-control-error>
+          </clr-input-container>
+          <clr-input-container>
+            <label>Role:</label>
+            <input clrInput formControlName="role" />
+            <clr-control-error *clrIfError="'required'">role Required</clr-control-error>
+          </clr-input-container>
+          <button clrStepButton="next">next</button>
+        </clr-step-content>
+      </clr-stepper-panel>
+    
+      <clr-stepper-panel formGroupName="password">
+        <clr-step-title>password</clr-step-title>
+        <clr-step-content *clrIfExpanded>
+            <clr-password-container>
+              <label class="clr-sr-only">Password</label>
+              <input
+                type="password"
+                autocomplete="current-password"
+                name="password"
+                clrPassword
+                placeholder="Enter password"
+                formControlName="password"
+               
+              />
+            </clr-password-container>
+              <clr-password-container>
+                <label class="clr-sr-only">Password</label>
+                <input
+                  type="password"
+                  autocomplete="current-password"
+                  name="password"
+                  clrPassword
+                  placeholder="Enter password"
+                  formControlName="confirmPassword"
+                 
+                />
+              </clr-password-container>
+              <button clrStepButton="submit">submit</button>
+            </clr-step-content>
+      </clr-stepper-panel>
+    
+
+    </form>
